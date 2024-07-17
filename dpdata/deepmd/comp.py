@@ -75,7 +75,7 @@ def to_system_data(folder, type_map=None, labels=True):
                 "orig",
                 "cells",
                 "coords",
-                "real_atom_types",
+                # "real_atom_types",
                 "real_atom_names",
                 "nopbc",
                 "energies",
@@ -181,7 +181,7 @@ def dump(folder, data, set_size=5000, comp_prec=np.float32, remove_sets=True):
             "orig",
             "cells",
             "coords",
-            "real_atom_types",
+            # "real_atom_types",
             "real_atom_names",
             "nopbc",
             "energies",
@@ -202,4 +202,10 @@ def dump(folder, data, set_size=5000, comp_prec=np.float32, remove_sets=True):
             set_stt = ii * set_size
             set_end = (ii + 1) * set_size
             set_folder = os.path.join(folder, "set.%03d" % ii)
-            np.save(os.path.join(set_folder, dtype.name), ddata[set_stt:set_end])
+            if dtype.name == "real_atom_types":
+                np.save(
+                    os.path.join(set_folder, dtype.name),
+                    ddata[set_stt:set_end].astype(np.int64),
+                )
+            else:
+                np.save(os.path.join(set_folder, dtype.name), ddata[set_stt:set_end])

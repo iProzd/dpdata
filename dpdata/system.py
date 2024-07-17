@@ -94,7 +94,7 @@ class System:
         DataType("cells", np.ndarray, (Axis.NFRAMES, 3, 3)),
         DataType("coords", np.ndarray, (Axis.NFRAMES, Axis.NATOMS, 3)),
         DataType(
-            "real_atom_types", np.ndarray, (Axis.NFRAMES, Axis.NATOMS), required=False
+            "real_atom_types", np.ndarray, (Axis.NFRAMES, Axis.NATOMS), required=True
         ),
         DataType("real_atom_names", list, (Axis.NTYPES,), required=False),
         DataType("nopbc", bool, required=False),
